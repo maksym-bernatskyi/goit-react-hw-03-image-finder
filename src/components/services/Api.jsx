@@ -3,7 +3,7 @@ const BASE_URL = "https://pixabay.com/api/";
 export function fetchImage(query, page = 1) {
     const options = new URLSearchParams({
         key: "30579822-7048314e53034861817646057",
-        query: query,
+        q: query,
         image_type: "photo",
         orientation: "horizontal",
         per_page: 12,
