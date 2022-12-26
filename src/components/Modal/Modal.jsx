@@ -31,16 +31,16 @@ class Modal extends Component {
 
         return createPortal(
             <div onClick={this.handleBackdropClick} className={styles.ModalBackdrop}>
-            <div className={styles.ImageModal}>
-            <button onClick={onClose} className={styles.ButtonModal} type="button">
-            <FiXCircle size="50px" />
-            </button>
-            <img src={largeImage} alt={type} />
-            <span className={styles.TextImage}>{tag}</span>
-            </div>
+              <div className={styles.ImageModal}>
+                <button onClick={onClose} className={styles.ButtonModal} type="button">
+                  <FiXCircle size="50px" />
+                </button>
+                <img src={largeImage} alt={type} />
+                <span className={styles.TextImage}>{tag}</span>
+              </div>
             </div>,
-      modalRoot
-    );
+            modalRoot
+          );
     }
 }
 

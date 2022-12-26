@@ -37,36 +37,34 @@ class SearchInfo extends Component {
 
             fetchImage(nextImageName)
             .then((data) => this.setState({ images: data.hits, status: "resolved" }))
-            .catch((error) => this.setState({ error, status: "rejected"}))
+            .catch((error) => this.setState({ error, status: "rejected" }))
             .finally(() => this.setState({ loading: false }));
         }
     }
 
     handleLoadMore = () => {
-        this.setState(
-          (prevState) => ({
-            page: prevState.page + 1,
-            loading: true,
-          }),
-          () => {
-            fetchImage(this.props.imageName, this.state.page)
-            .then((data) => this.setState((prevState) => {
-                return {
-                  images: [...prevState.images, ...data.hits],
-                  status: "resolved",
-                  loading: false,
-                };
-              })
-            );
-          }
-        );
-      };
+      this.setState(
+        (prevState) => ({
+          page: prevState.page + 1,
+          loading: true,
+        }),
+        () => {
+          fetchImage(this.props.imageName, this.state.page).then((data) =>
+            this.setState((prevState) => {
+              return {
+                images: [...prevState.images, ...data.hits],
+                status: "resolved",
+                loading: false,
+              };
+            })
+          );
+        }
+      );
+    };  
 
-      openModal = () => {
-        this.setState(({ showModal }) => ({
-            showModal: !showModal,
-        }));
-      };
+    openModal = () => {
+      this.setState(({ showModal }) => ({ showModal: !showModal }));
+    };  
 
       handleGalleryItem = (fullImageUrl, tags, type) => {
         this.setState({
