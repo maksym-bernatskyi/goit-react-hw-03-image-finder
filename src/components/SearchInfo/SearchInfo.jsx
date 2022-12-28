@@ -22,6 +22,7 @@ class SearchInfo extends Component {
         largeImage: "",
         type: "",
         tags: "",
+        totalHits: "",
     };
 
     componentDidUpdate(prevProps) {
@@ -36,7 +37,7 @@ class SearchInfo extends Component {
             });
 
             fetchImage(nextImageName)
-            .then((data) => this.setState({ images: data.hits, status: "resolved" }))
+            .then((data) => this.setState({ images: data.hits, totalHits: data.totalHits, status: "resolved" }))
             .catch((error) => this.setState({ error, status: "rejected" }))
             .finally(() => this.setState({ loading: false }));
         }
@@ -89,7 +90,7 @@ class SearchInfo extends Component {
       };
 
       render() {
-        const { images, loading, status, showModal, largeImage, tags, type } = this.state;
+        const { images, loading, status, showModal, largeImage, tags, type, totalHits } = this.state;
 
         if (status === "idle") {
             return (
@@ -137,9 +138,9 @@ class SearchInfo extends Component {
                     </ImageGallery>
 
                     <Container>
-                        <Button onClick={this.handleLoadMore}>
+                        {images.length !== totalHits && <Button onClick={this.handleLoadMore}>
                         {loading && <Loader />}
-                        </Button>
+                        </Button>}
                     </Container>
 
                     <ScrollToTop smooth />
