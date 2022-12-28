@@ -23,7 +23,10 @@ class Searchbar extends Component {
         }
 
         this.props.onFormSubmit(this.state.imageName);
-        this.setState({ imageName: "" });
+        this.setState({
+            imageName: "",
+        });
+        this.mainInput.value = "";
     };
 
     render() {
@@ -37,6 +40,7 @@ class Searchbar extends Component {
 
             <input
                 onChange={this.handleChangeInput}
+                ref={(ref) => this.mainInput= ref}
                 className={styles.searchFormInput}
                 type="text"
                 autoComplete="off"
